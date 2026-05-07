@@ -1,954 +1,1766 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jesse's Jungalow — Original Paintings</title>
-  <meta name="description" content="Hand-painted originals in acrylic, watercolor, and oil. Based in Cebu City, Philippines. Ships nationwide and worldwide." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --cream:    #F5F0E8;
-      --parchment:#EDE5D0;
-      --sand:     #D6C9A8;
-      --clay:     #B8935A;
-      --terracotta:#C4623A;
-      --bark:     #6B4E2A;
-      --forest:   #3D5A3E;
-      --ink:      #2A1F14;
-      --warm-white:#FDFAF4;
-      --muted:    #8C7B65;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--cream);
-      color: var(--ink);
-      overflow-x: hidden;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--warm-white);
-      border-bottom: 1px solid var(--sand);
-      padding: 0 5%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 64px;
-    }
-
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.25rem;
-      color: var(--ink);
-      text-decoration: none;
-      letter-spacing: 0.01em;
-    }
-
-    .nav-logo span {
-      color: var(--terracotta);
-      font-style: italic;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 0.85rem;
-      font-weight: 400;
-      color: var(--muted);
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover { color: var(--terracotta); }
-
-    .nav-cta {
-      font-size: 0.82rem;
-      font-weight: 500;
-      color: var(--warm-white) !important;
-      background: var(--terracotta);
-      padding: 8px 18px;
-      border-radius: 2px;
-      text-transform: uppercase !important;
-      letter-spacing: 0.06em !important;
-      transition: background 0.2s !important;
-    }
-
-    .nav-cta:hover { background: var(--bark) !important; color: var(--warm-white) !important; }
-
-    /* ── HERO ── */
-    .hero {
-      min-height: 90vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      background: var(--warm-white);
-    }
-
-    .hero-left {
-      padding: 80px 6% 80px 8%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 1.5rem;
-      border-right: 1px solid var(--sand);
-      animation: fadeUp 0.8s ease both;
-    }
-
-    .hero-eyebrow {
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--clay);
-    }
-
-    .hero-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.4rem, 4vw, 3.4rem);
-      line-height: 1.15;
-      color: var(--ink);
-    }
-
-    .hero-title em {
-      color: var(--terracotta);
-      font-style: italic;
-    }
-
-    .hero-sub {
-      font-size: 1rem;
-      font-weight: 300;
-      color: var(--muted);
-      line-height: 1.75;
-      max-width: 420px;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 0.5rem;
-    }
-
-    .btn-primary {
-      display: inline-block;
-      padding: 14px 28px;
-      background: var(--terracotta);
-      color: var(--warm-white);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border-radius: 2px;
-      border: none;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
-    }
-
-    .btn-primary:hover { background: var(--bark); transform: translateY(-1px); }
-
-    .btn-outline {
-      display: inline-block;
-      padding: 13px 28px;
-      background: transparent;
-      color: var(--bark);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border-radius: 2px;
-      border: 1px solid var(--clay);
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .btn-outline:hover { background: var(--parchment); }
-
-    .hero-tags {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 0.5rem;
-    }
-
-    .tag {
-      font-size: 0.75rem;
-      padding: 4px 12px;
-      border-radius: 20px;
-      border: 1px solid var(--sand);
-      color: var(--muted);
-      background: var(--parchment);
-    }
-
-    .hero-right {
-      background: var(--parchment);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      min-height: 400px;
-      animation: fadeIn 1s ease 0.2s both;
-    }
-
-    .hero-painting-wrap {
-      position: relative;
-      width: 340px;
-      max-width: 80%;
-    }
-
-    .painting-frame {
-      width: 100%;
-      aspect-ratio: 3/4;
-      background: var(--sand);
-      border: 8px solid var(--warm-white);
-      outline: 1px solid var(--clay);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 0.9rem;
-      color: var(--muted);
-      text-align: center;
-      padding: 20px;
-      line-height: 1.6;
-      position: relative;
-    }
-
-    /* decorative corner marks */
-    .painting-frame::before,
-    .painting-frame::after {
-      content: '';
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      border-color: var(--clay);
-      border-style: solid;
-    }
-    .painting-frame::before { top: -2px; left: -2px; border-width: 2px 0 0 2px; }
-    .painting-frame::after  { bottom: -2px; right: -2px; border-width: 0 2px 2px 0; }
-
-    .frame-label {
-      position: absolute;
-      bottom: -36px;
-      left: 0;
-      right: 0;
-      text-align: center;
-      font-size: 0.75rem;
-      color: var(--muted);
-      letter-spacing: 0.04em;
-    }
-
-    /* ── SECTION SHARED ── */
-    section { padding: 80px 8%; }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 40px;
-    }
-
-    .section-eyebrow {
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--clay);
-      margin-bottom: 6px;
-    }
-
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.9rem;
-      color: var(--ink);
-      line-height: 1.2;
-    }
-
-    .section-link {
-      font-size: 0.82rem;
-      color: var(--terracotta);
-      text-decoration: none;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      border-bottom: 1px solid var(--terracotta);
-      padding-bottom: 1px;
-      white-space: nowrap;
-    }
-
-    /* ── FEATURED PAINTINGS ── */
-    .featured { background: var(--warm-white); }
-
-    .paintings-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .painting-card {
-      background: var(--parchment);
-      border: 1px solid var(--sand);
-      border-radius: 2px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.2s, border-color 0.2s;
-    }
-
-    .painting-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--clay);
-    }
-
-    .painting-img {
-      aspect-ratio: 4/3;
-      background: var(--sand);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 0.85rem;
-      color: var(--muted);
-      text-align: center;
-      padding: 16px;
-      line-height: 1.5;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .painting-img-1 { background: #C9B99A; }
-    .painting-img-2 { background: #A8B89C; }
-    .painting-img-3 { background: #C4A882; }
-
-    .sold-badge {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 3px 10px;
-      background: var(--ink);
-      color: var(--cream);
-      border-radius: 1px;
-    }
-
-    .available-badge {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 3px 10px;
-      background: var(--forest);
-      color: var(--cream);
-      border-radius: 1px;
-    }
-
-    .painting-body {
-      padding: 16px 18px 20px;
-      border-top: 1px solid var(--sand);
-    }
-
-    .painting-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      color: var(--ink);
-      margin-bottom: 4px;
-    }
-
-    .painting-meta {
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
-
-    .painting-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .painting-price {
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--bark);
-    }
-
-    .btn-small {
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 7px 14px;
-      background: var(--terracotta);
-      color: var(--warm-white);
-      border: none;
-      border-radius: 2px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-
-    .btn-small:hover { background: var(--bark); }
-
-    /* ── ABOUT STRIP ── */
-    .about-strip {
-      background: var(--bark);
-      color: var(--cream);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-    }
-
-    .about-strip-left {
-      padding: 60px 8%;
-      border-right: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .about-strip-left .section-eyebrow { color: var(--sand); }
-
-    .about-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.9rem;
-      color: var(--cream);
-      line-height: 1.25;
-      margin-bottom: 1rem;
-    }
-
-    .about-body {
-      font-size: 0.95rem;
-      font-weight: 300;
-      color: var(--sand);
-      line-height: 1.8;
-      margin-bottom: 1.5rem;
-    }
-
-    .btn-light {
-      display: inline-block;
-      padding: 12px 24px;
-      background: transparent;
-      color: var(--cream);
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border: 1px solid rgba(255,255,255,0.4);
-      border-radius: 2px;
-      transition: background 0.2s;
-    }
-
-    .btn-light:hover { background: rgba(255,255,255,0.1); }
-
-    .about-strip-right {
-      padding: 60px 8%;
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-    }
-
-    .stat-item { border-left: 2px solid var(--clay); padding-left: 16px; }
-
-    .stat-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      color: var(--cream);
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-
-    .stat-label {
-      font-size: 0.8rem;
-      color: var(--sand);
-      font-weight: 300;
-    }
-
-    /* ── TRUST SIGNALS ── */
-    .trust { background: var(--parchment); }
-
-    .trust-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      border: 1px solid var(--sand);
-      border-radius: 2px;
-      overflow: hidden;
-    }
-
-    .trust-item {
-      padding: 28px 24px;
-      border-right: 1px solid var(--sand);
-    }
-
-    .trust-item:last-child { border-right: none; }
-
-    .trust-icon {
-      width: 32px;
-      height: 32px;
-      margin-bottom: 12px;
-      color: var(--terracotta);
-    }
-
-    .trust-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 0.95rem;
-      color: var(--ink);
-      margin-bottom: 6px;
-    }
-
-    .trust-desc {
-      font-size: 0.8rem;
-      font-weight: 300;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    /* ── ORDER PROCESS ── */
-    .process { background: var(--warm-white); }
-
-    .process-steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      position: relative;
-    }
-
-    .process-steps::before {
-      content: '';
-      position: absolute;
-      top: 22px;
-      left: 12%;
-      right: 12%;
-      height: 1px;
-      background: var(--sand);
-    }
-
-    .process-step { padding: 0 20px; text-align: center; }
-
-    .step-num {
-      width: 44px;
-      height: 44px;
-      background: var(--warm-white);
-      border: 1px solid var(--clay);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      color: var(--terracotta);
-      margin: 0 auto 16px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .step-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 0.95rem;
-      color: var(--ink);
-      margin-bottom: 8px;
-    }
-
-    .step-desc {
-      font-size: 0.8rem;
-      font-weight: 300;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    /* ── CONTACT STRIP ── */
-    .contact-strip {
-      background: var(--terracotta);
-      padding: 60px 8%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 40px;
-    }
-
-    .contact-left { max-width: 500px; }
-
-    .contact-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      color: var(--warm-white);
-      margin-bottom: 8px;
-      line-height: 1.25;
-    }
-
-    .contact-sub {
-      font-size: 0.9rem;
-      font-weight: 300;
-      color: rgba(255,255,255,0.8);
-      line-height: 1.6;
-    }
-
-    .contact-links {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .contact-btn {
-      display: inline-block;
-      padding: 12px 24px;
-      background: var(--warm-white);
-      color: var(--terracotta);
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border-radius: 2px;
-      transition: opacity 0.2s;
-    }
-
-    .contact-btn:hover { opacity: 0.9; }
-
-    .contact-btn-outline {
-      display: inline-block;
-      padding: 11px 24px;
-      background: transparent;
-      color: var(--warm-white);
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border: 1px solid rgba(255,255,255,0.5);
-      border-radius: 2px;
-      transition: background 0.2s;
-    }
-
-    .contact-btn-outline:hover { background: rgba(255,255,255,0.1); }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--ink);
-      padding: 40px 8%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .footer-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      color: var(--cream);
-    }
-
-    .footer-logo span { color: var(--clay); font-style: italic; }
-
-    .footer-copy {
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-
-    .footer-social {
-      display: flex;
-      gap: 16px;
-    }
-
-    .footer-social a {
-      font-size: 0.78rem;
-      color: var(--muted);
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-
-    .footer-social a:hover { color: var(--clay); }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      nav { padding: 0 5%; }
-      .nav-links { display: none; }
-      .hero { grid-template-columns: 1fr; }
-      .hero-right { min-height: 280px; }
-      .hero-left { padding: 48px 6%; }
-      section { padding: 56px 6%; }
-      .paintings-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
-      .trust-grid { grid-template-columns: 1fr 1fr; }
-      .trust-item { border-bottom: 1px solid var(--sand); }
-      .process-steps { grid-template-columns: 1fr 1fr; gap: 32px; }
-      .process-steps::before { display: none; }
-      .about-strip { grid-template-columns: 1fr; }
-      .about-strip-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
-      .contact-strip { flex-direction: column; align-items: flex-start; }
-      footer { flex-direction: column; align-items: flex-start; gap: 12px; }
-    }
-
-    @media (max-width: 480px) {
-      .paintings-grid { grid-template-columns: 1fr; }
-      .trust-grid { grid-template-columns: 1fr; }
-      .process-steps { grid-template-columns: 1fr; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jesse's Jungalow — Original Paintings</title>
+<meta name="description" content="Hand-painted originals in acrylic, watercolor, and oil. Based in Cebu City, Philippines. Ships nationwide and worldwide." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --cream: #F5F0E8;
+  --parchment: #EDE5D0;
+  --sand: #D6C9A8;
+  --clay: #B8935A;
+  --terracotta: #C4623A;
+  --bark: #6B4E2A;
+  --forest: #3D5A3E;
+  --ink: #2A1F14;
+  --warm-white: #FDFAF4;
+  --muted: #8C7B65;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--warm-white);
+  border-bottom: 1px solid var(--sand);
+  padding: 0 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+.nav-logo span { color: var(--terracotta); font-style: italic; }
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--terracotta); }
+
+.nav-cta {
+  font-size: 0.82rem !important;
+  font-weight: 500 !important;
+  color: var(--warm-white) !important;
+  background: var(--terracotta);
+  padding: 8px 18px;
+  border-radius: 2px;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  transition: background 0.2s !important;
+}
+.nav-cta:hover { background: var(--bark) !important; color: var(--warm-white) !important; }
+
+/* ── HAMBURGER ── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 200;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+  transform-origin: center;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── MOBILE MENU OVERLAY ── */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--warm-white);
+  z-index: 150;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  opacity: 0;
+  transform: translateY(-16px);
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+}
+.mobile-menu.open {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+.mobile-menu a {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--ink);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(--terracotta); }
+.mobile-menu .mobile-cta {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--warm-white) !important;
+  background: var(--terracotta);
+  padding: 14px 36px;
+  border-radius: 2px;
+  margin-top: 1rem;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 90vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--warm-white);
+}
+.hero-left {
+  padding: 80px 6% 80px 8%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  border-right: 1px solid var(--sand);
+  animation: fadeUp 0.8s ease both;
+}
+.hero-eyebrow {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--clay);
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  line-height: 1.15;
+  color: var(--ink);
+}
+.hero-title em { color: var(--terracotta); font-style: italic; }
+.hero-sub {
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.75;
+  max-width: 420px;
+}
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+.btn-primary {
+  display: inline-block;
+  padding: 14px 28px;
+  background: var(--terracotta);
+  color: var(--warm-white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover { background: var(--bark); transform: translateY(-1px); }
+.btn-outline {
+  display: inline-block;
+  padding: 13px 28px;
+  background: transparent;
+  color: var(--bark);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  border: 1px solid var(--clay);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-outline:hover { background: var(--parchment); }
+.hero-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+.tag {
+  font-size: 0.75rem;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--sand);
+  color: var(--muted);
+  background: var(--parchment);
+}
+.hero-right {
+  background: var(--parchment);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  min-height: 400px;
+  animation: fadeIn 1s ease 0.2s both;
+}
+.hero-painting-wrap {
+  position: relative;
+  width: 340px;
+  max-width: 80%;
+}
+.painting-frame {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: var(--sand);
+  border: 8px solid var(--warm-white);
+  outline: 1px solid var(--clay);
+  overflow: hidden;
+  position: relative;
+}
+.painting-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.painting-frame::before,
+.painting-frame::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: var(--clay);
+  border-style: solid;
+  z-index: 2;
+}
+.painting-frame::before { top: -2px; left: -2px; border-width: 2px 0 0 2px; }
+.painting-frame::after  { bottom: -2px; right: -2px; border-width: 0 2px 2px 0; }
+.frame-label {
+  position: absolute;
+  bottom: -36px;
+  left: 0; right: 0;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+/* ── SECTION SHARED ── */
+section { padding: 80px 8%; }
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 40px;
+}
+.section-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--clay);
+  margin-bottom: 6px;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.9rem;
+  color: var(--ink);
+  line-height: 1.2;
+}
+.section-link {
+  font-size: 0.82rem;
+  color: var(--terracotta);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--terracotta);
+  padding-bottom: 1px;
+  white-space: nowrap;
+}
+
+/* ── FEATURED PAINTINGS ── */
+.featured { background: var(--warm-white); }
+
+/* 3-col for 3 or 6, but we use auto-fill so 5 wraps nicely */
+.paintings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.painting-card {
+  background: var(--parchment);
+  border: 1px solid var(--sand);
+  border-radius: 2px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+.painting-card:hover { transform: translateY(-4px); border-color: var(--clay); }
+
+.painting-img {
+  aspect-ratio: 4/3;
+  background: var(--sand);
+  position: relative;
+  overflow: hidden;
+}
+.painting-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.painting-card:hover .painting-img img { transform: scale(1.04); }
+
+/* fallback bg tints (only shows if image is missing) */
+.painting-img-1 { background: #C9B99A; }
+.painting-img-2 { background: #A8B89C; }
+.painting-img-3 { background: #C4A882; }
+.painting-img-4 { background: #B8A090; }
+.painting-img-5 { background: #9FB0A0; }
+
+.sold-badge {
+  position: absolute; top: 12px; right: 12px;
+  font-size: 0.65rem; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 3px 10px;
+  background: var(--ink); color: var(--cream);
+  border-radius: 1px;
+}
+.available-badge {
+  position: absolute; top: 12px; right: 12px;
+  font-size: 0.65rem; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 3px 10px;
+  background: var(--forest); color: var(--cream);
+  border-radius: 1px;
+}
+
+.painting-body {
+  padding: 16px 18px 20px;
+  border-top: 1px solid var(--sand);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.painting-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.painting-meta {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.painting-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+.painting-price {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--bark);
+}
+.painting-price-note {
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-weight: 300;
+  margin-top: 2px;
+}
+
+.btn-small {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 7px 14px;
+  background: var(--terracotta);
+  color: var(--warm-white);
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.btn-small:hover { background: var(--bark); }
+.btn-small-outline {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--sand);
+  border-radius: 2px;
+  cursor: default;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* ── ABOUT STRIP ── */
+.about-strip {
+  background: var(--bark);
+  color: var(--cream);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.about-strip-left {
+  padding: 60px 8%;
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+.about-strip-left .section-eyebrow { color: var(--sand); }
+.about-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.9rem;
+  color: var(--cream);
+  line-height: 1.25;
+  margin-bottom: 1rem;
+}
+.about-body {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--sand);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+.btn-light {
+  display: inline-block;
+  padding: 12px 24px;
+  background: transparent;
+  color: var(--cream);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 2px;
+  transition: background 0.2s;
+}
+.btn-light:hover { background: rgba(255,255,255,0.1); }
+.about-strip-right {
+  padding: 60px 8%;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.stat-item { border-left: 2px solid var(--clay); padding-left: 16px; }
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--cream);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-label { font-size: 0.8rem; color: var(--sand); font-weight: 300; }
+
+/* ── TRUST SIGNALS ── */
+.trust { background: var(--parchment); }
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--sand);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.trust-item {
+  padding: 28px 24px;
+  border-right: 1px solid var(--sand);
+}
+.trust-item:last-child { border-right: none; }
+.trust-icon { width: 32px; height: 32px; margin-bottom: 12px; color: var(--terracotta); }
+.trust-title { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--ink); margin-bottom: 6px; }
+.trust-desc { font-size: 0.8rem; font-weight: 300; color: var(--muted); line-height: 1.6; }
+
+/* ── ORDER PROCESS ── */
+.process { background: var(--warm-white); }
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  position: relative;
+}
+.process-steps::before {
+  content: '';
+  position: absolute;
+  top: 22px; left: 12%; right: 12%;
+  height: 1px;
+  background: var(--sand);
+}
+.process-step { padding: 0 20px; text-align: center; }
+.step-num {
+  width: 44px; height: 44px;
+  background: var(--warm-white);
+  border: 1px solid var(--clay);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: var(--terracotta);
+  margin: 0 auto 16px;
+  position: relative; z-index: 1;
+}
+.step-title { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--ink); margin-bottom: 8px; }
+.step-desc { font-size: 0.8rem; font-weight: 300; color: var(--muted); line-height: 1.6; }
+
+/* ── CONTACT STRIP ── */
+.contact-strip {
+  background: var(--terracotta);
+  padding: 60px 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
+.contact-left { max-width: 500px; }
+.contact-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: var(--warm-white);
+  margin-bottom: 8px;
+  line-height: 1.25;
+}
+.contact-sub { font-size: 0.9rem; font-weight: 300; color: rgba(255,255,255,0.8); line-height: 1.6; }
+.contact-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.contact-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background: var(--warm-white);
+  color: var(--terracotta);
+  font-size: 0.82rem; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  text-decoration: none; border-radius: 2px;
+  transition: opacity 0.2s;
+}
+.contact-btn:hover { opacity: 0.9; }
+.contact-btn-outline {
+  display: inline-block;
+  padding: 11px 24px;
+  background: transparent;
+  color: var(--warm-white);
+  font-size: 0.82rem; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  text-decoration: none; border-radius: 2px;
+  border: 1px solid rgba(255,255,255,0.5);
+  transition: background 0.2s;
+}
+.contact-btn-outline:hover { background: rgba(255,255,255,0.1); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink);
+  padding: 40px 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--cream); }
+.footer-logo span { color: var(--clay); font-style: italic; }
+.footer-copy { font-size: 0.78rem; color: var(--muted); }
+.footer-social { display: flex; gap: 16px; }
+.footer-social a {
+  font-size: 0.78rem; color: var(--muted);
+  text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase;
+  transition: color 0.2s;
+}
+.footer-social a:hover { color: var(--clay); }
+
+/* ── LIGHTBOX ── */
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(42, 31, 20, 0.92);
+  z-index: 500;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  backdrop-filter: blur(4px);
+}
+.lightbox-overlay.open { display: flex; }
+.lightbox-inner {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 0;
+  background: var(--warm-white);
+  max-width: 1000px;
+  width: 100%;
+  max-height: 90vh;
+  border-radius: 2px;
+  overflow: hidden;
+  animation: fadeUp 0.25s ease both;
+}
+.lightbox-img-wrap {
+  background: var(--parchment);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  min-height: 500px;
+}
+.lightbox-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.lightbox-info {
+  padding: 48px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-left: 1px solid var(--sand);
+  overflow-y: auto;
+}
+.lightbox-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--clay);
+}
+.lightbox-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.lightbox-meta {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.7;
+}
+.lightbox-price {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--bark);
+  margin-top: 0.5rem;
+}
+.lightbox-price-note {
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-weight: 300;
+  margin-top: 3px;
+}
+.lightbox-divider {
+  border: none;
+  border-top: 1px solid var(--sand);
+  margin: 0.5rem 0;
+}
+.lightbox-actions { display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
+.lightbox-close {
+  position: absolute;
+  top: 20px; right: 24px;
+  background: none;
+  border: none;
+  color: var(--cream);
+  font-size: 1.8rem;
+  cursor: pointer;
+  line-height: 1;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+  z-index: 10;
+}
+.lightbox-close:hover { opacity: 1; }
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(253,250,244,0.15);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: var(--cream);
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+  z-index: 10;
+}
+.lightbox-nav:hover { background: rgba(253,250,244,0.25); }
+.lightbox-prev { left: 16px; }
+.lightbox-next { right: 16px; }
+
+/* ── FULL GALLERY ── */
+.gallery-full {
+  background: var(--cream);
+  padding: 80px 8%;
+}
+.gallery-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+.gallery-controls-left { flex: 1; display: flex; gap: 8px; flex-wrap: wrap; }
+.filter-btn {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 7px 16px;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--sand);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.filter-btn:hover, .filter-btn.active {
+  background: var(--ink);
+  color: var(--cream);
+  border-color: var(--ink);
+}
+.gallery-count {
+  font-size: 0.8rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.gallery-card {
+  background: var(--warm-white);
+  border: 1px solid var(--sand);
+  border-radius: 2px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+.gallery-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--clay);
+  box-shadow: 0 12px 32px rgba(42,31,20,0.08);
+}
+.gallery-card.hidden { display: none; }
+.gallery-img {
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  position: relative;
+  background: var(--sand);
+}
+.gallery-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.gallery-card:hover .gallery-img img { transform: scale(1.06); }
+.gallery-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(42,31,20,0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+}
+.gallery-card:hover .gallery-img-overlay { background: rgba(42,31,20,0.18); }
+.gallery-zoom-icon {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.3s, transform 0.3s;
+  color: var(--warm-white);
+  font-size: 1.5rem;
+  width: 48px; height: 48px;
+  border: 2px solid rgba(253,250,244,0.7);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.gallery-card:hover .gallery-zoom-icon { opacity: 1; transform: scale(1); }
+.gallery-badge {
+  position: absolute;
+  top: 12px; right: 12px;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 1px;
+}
+.badge-available { background: var(--forest); color: var(--cream); }
+.badge-sold { background: var(--ink); color: var(--cream); }
+.gallery-body {
+  padding: 18px 20px 22px;
+  border-top: 1px solid var(--sand);
+}
+.gallery-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin-bottom: 5px;
+}
+.gallery-meta { font-size: 0.78rem; color: var(--muted); margin-bottom: 14px; }
+.gallery-footer { display: flex; justify-content: space-between; align-items: center; }
+.gallery-price { font-size: 1rem; font-weight: 500; color: var(--bark); }
+.gallery-price-note { font-size: 0.7rem; color: var(--muted); font-weight: 300; margin-top: 2px; }
+
+/* ── COMMISSIONS SECTION ── */
+.commissions {
+  background: var(--parchment);
+  padding: 80px 8%;
+}
+.commissions-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.commissions-left { position: sticky; top: 100px; }
+.commissions-left .section-eyebrow { margin-bottom: 8px; }
+.commissions-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
+.commissions-desc {
+  font-size: 0.92rem;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+.commission-promise {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 2rem;
+}
+.promise-item { display: flex; gap: 14px; align-items: flex-start; }
+.promise-dot {
+  width: 8px; height: 8px;
+  background: var(--terracotta);
+  border-radius: 50%;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+.promise-text { font-size: 0.85rem; color: var(--muted); font-weight: 300; line-height: 1.6; }
+.promise-text strong { color: var(--ink); font-weight: 500; display: block; margin-bottom: 2px; }
+
+/* ── FORM ── */
+.commission-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 7px; }
+.form-group.full { grid-column: 1 / -1; }
+.form-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bark);
+}
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--warm-white);
+  border: 1px solid var(--sand);
+  border-radius: 2px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--ink);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  appearance: none;
+}
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--clay);
+  box-shadow: 0 0 0 3px rgba(184,147,90,0.12);
+}
+.form-input::placeholder,
+.form-textarea::placeholder { color: var(--muted); font-weight: 300; }
+.form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238C7B65' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; cursor: pointer; }
+.form-textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
+.form-hint { font-size: 0.72rem; color: var(--muted); font-weight: 300; }
+
+.form-submit-wrap { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 4px; }
+.btn-submit {
+  padding: 14px 36px;
+  background: var(--terracotta);
+  color: var(--warm-white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-submit:hover { background: var(--bark); transform: translateY(-1px); }
+.form-alt {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-weight: 300;
+}
+.form-alt a { color: var(--terracotta); text-decoration: none; border-bottom: 1px solid currentColor; }
+
+/* success state */
+.form-success {
+  display: none;
+  background: var(--warm-white);
+  border: 1px solid var(--sand);
+  border-radius: 2px;
+  padding: 40px;
+  text-align: center;
+}
+.form-success.show { display: block; }
+.form-success-icon { font-size: 2rem; margin-bottom: 12px; }
+.form-success h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.form-success p { font-size: 0.88rem; color: var(--muted); font-weight: 300; line-height: 1.7; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .paintings-grid { grid-template-columns: repeat(2, 1fr); }
+  .trust-grid { grid-template-columns: 1fr 1fr; }
+  .trust-item:nth-child(2) { border-right: none; }
+  .trust-item:nth-child(1),
+  .trust-item:nth-child(2) { border-bottom: 1px solid var(--sand); }
+}
+
+@media (max-width: 768px) {
+  nav { padding: 0 5%; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { min-height: 280px; }
+  .hero-left { padding: 48px 6%; }
+
+  section { padding: 56px 6%; }
+
+  .process-steps { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .process-steps::before { display: none; }
+
+  .about-strip { grid-template-columns: 1fr; }
+  .about-strip-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+
+  .contact-strip { flex-direction: column; align-items: flex-start; }
+  footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
+
+@media (max-width: 560px) {
+  .paintings-grid { grid-template-columns: 1fr; }
+  .trust-grid { grid-template-columns: 1fr; }
+  .trust-item { border-right: none !important; border-bottom: 1px solid var(--sand); }
+  .trust-item:last-child { border-bottom: none; }
+  .process-steps { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body>
 
-  <!-- NAVIGATION -->
-  <nav>
-    <a href="#" class="nav-logo"><span>Jesse's</span> Jungalow</a>
-    <ul class="nav-links">
-      <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#how-to-order">How to order</a></li>
-      <li><a href="#contact" class="nav-cta">Get in touch</a></li>
-    </ul>
-  </nav>
+<!-- NAVIGATION -->
+<nav>
+  <a href="#" class="nav-logo"><span>Jesse's</span> Jungalow</a>
+  <ul class="nav-links">
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#commissions">Commissions</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="nav-cta">Get in touch</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-left">
-      <p class="hero-eyebrow">Original paintings · Cebu City, Philippines</p>
-      <h1 class="hero-title">Art that doesn't<br>whisper — <em>it speaks.</em></h1>
-<p class="hero-sub">Each piece is hand-painted from scratch, bold in color, raw in feeling. Born in Cebu, made for walls that deserve more than ordinary.</p>
-      <div class="hero-actions">
-        <a href="#gallery" class="btn-primary">View collection</a>
-        <a href="#how-to-order" class="btn-outline">How to order</a>
-      </div>
-      <div class="hero-tags">
-        <span class="tag">Acrylic</span>
-        <span class="tag">Watercolor</span>
-        <span class="tag">Oil painting</span>
-        <span class="tag">Commissions open</span>
-        <span class="tag">Ships worldwide</span>
-      </div>
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true">
+  <a href="#gallery"      onclick="closeMenu()">Gallery</a>
+  <a href="#shop"         onclick="closeMenu()">Shop</a>
+  <a href="#commissions"  onclick="closeMenu()">Commissions</a>
+  <a href="#about"        onclick="closeMenu()">About</a>
+  <a href="#contact" class="mobile-cta" onclick="closeMenu()">Get in touch</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Original paintings · Cebu City, Philippines</p>
+    <h1 class="hero-title">Art that doesn't<br>whisper — <em>it speaks.</em></h1>
+    <p class="hero-sub">Each piece is hand-painted from scratch, bold in color, raw in feeling. Born in Cebu, made for walls that deserve more than ordinary.</p>
+    <div class="hero-actions">
+      <a href="#gallery" class="btn-primary">View collection</a>
+      <a href="#how-to-order" class="btn-outline">How to order</a>
     </div>
-    <div class="hero-right">
-      <div class="hero-painting-wrap">
-        <div class="painting-frame">
-          <img src="Heart of the Lotus.jpg" alt="Heart of the Lotus" style="width:100%;height:100%;object-fit:cover;display:block;">
-          <br><br>
-        </div>
-        <p class="frame-label">Featured work · Heart of the Lotus</p>
+    <div class="hero-tags">
+      <span class="tag">Acrylic</span>
+      <span class="tag">Watercolor</span>
+      <span class="tag">Oil painting</span>
+      <span class="tag">Commissions open</span>
+      <span class="tag">Ships worldwide</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-painting-wrap">
+      <div class="painting-frame">
+        <img src="Heart of the Lotus.jpg" alt="Heart of the Lotus" />
       </div>
+      <p class="frame-label">Featured work · Heart of the Lotus</p>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURED PAINTINGS -->
+<section class="featured" id="gallery">
+  <div class="section-header">
+    <div>
+      <p class="section-eyebrow">Available works</p>
+      <h2 class="section-title">Featured pieces</h2>
     </div>
   </div>
 
-  <!-- FEATURED PAINTINGS -->
-  <section class="featured" id="gallery">
-    <div class="section-header">
+  <div class="paintings-grid">
+
+    <!-- 1: The Daily Grace -->
+    <div class="painting-card">
+      <div class="painting-img painting-img-1">
+        <span class="available-badge">Available</span>
+        <img src="The Daily Grace.jpg" alt="The Daily Grace" />
+      </div>
+      <div class="painting-body">
+        <h3 class="painting-title">The Daily Grace</h3>
+        <p class="painting-meta">Acrylic on canvas · 12 × 16 in</p>
+        <div class="painting-footer">
+          <div>
+            <p class="painting-price">₱75,000</p>
+          </div>
+          <a href="https://pm.link/org-9kmeSzBre34pbKkjBh3fUPVD/lN0hYkR" class="btn-small" target="_blank">Order now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2: Heart of the Lotus -->
+    <div class="painting-card">
+      <div class="painting-img painting-img-2">
+        <span class="available-badge">Available</span>
+        <img src="Heart of the Lotus.jpg" alt="Heart of the Lotus" />
+      </div>
+      <div class="painting-body">
+        <h3 class="painting-title">Heart of the Lotus</h3>
+        <p class="painting-meta">Acrylic on canvas · 20 × 24 in</p>
+        <div class="painting-footer">
+          <div>
+            <p class="painting-price">₱78,800</p>
+            <p class="painting-price-note">Includes certificate of authenticity &amp; artist's note</p>
+          </div>
+          <a href="https://pm.link/org-9kmeSzBre34pbKkjBh3fUPVD/ZwQOEBB" class="btn-small" target="_blank">Order now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3: The Keeper of Flame -->
+    <div class="painting-card">
+      <div class="painting-img painting-img-3">
+        <span class="available-badge">Available</span>
+        <img src="The Keeper of Flame.jpg" alt="The Keeper of Flame" />
+      </div>
+      <div class="painting-body">
+        <h3 class="painting-title">The Keeper of Flame</h3>
+        <p class="painting-meta">Acrylic on canvas · 20 × 24 in</p>
+        <div class="painting-footer">
+          <div>
+            <p class="painting-price">₱78,800</p>
+            <p class="painting-price-note">Includes certificate of authenticity &amp; artist's note</p>
+          </div>
+          <a href="https://pm.link/org-9kmeSzBre34pbKkjBh3fUPVD/EJBAPvX" class="btn-small" target="_blank">Order now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4: The Threaded Reverie -->
+    <div class="painting-card">
+      <div class="painting-img painting-img-4">
+        <span class="available-badge">Available</span>
+        <img src="The Threaded Reverie.jpg" alt="The Threaded Reverie" />
+      </div>
+      <div class="painting-body">
+        <h3 class="painting-title">The Threaded Reverie</h3>
+        <p class="painting-meta">Acrylic on canvas</p>
+        <div class="painting-footer">
+          <div>
+            <p class="painting-price">Inquire for price</p>
+          </div>
+          <!-- REPLACE href with your PayMongo link for this painting -->
+          <a href="#contact" class="btn-small">Inquire</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5: The Whispers of Lily -->
+    <div class="painting-card">
+      <div class="painting-img painting-img-5">
+        <span class="available-badge">Available</span>
+        <img src="The Whispers of Lily.jpg" alt="The Whispers of Lily" />
+      </div>
+      <div class="painting-body">
+        <h3 class="painting-title">The Whispers of Lily</h3>
+        <p class="painting-meta">Acrylic on canvas</p>
+        <div class="painting-footer">
+          <div>
+            <p class="painting-price">Inquire for price</p>
+          </div>
+          <!-- REPLACE href with your PayMongo link for this painting -->
+          <a href="#contact" class="btn-small">Inquire</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT STRIP -->
+<div class="about-strip" id="about">
+  <div class="about-strip-left">
+    <p class="section-eyebrow">About the artist</p>
+    <h2 class="about-title">Hi, I'm Jesse —<br>welcome to the Jungalow</h2>
+    <p class="about-body">
+      I'm a self-taught painter based in Cebu City, Philippines. My work is inspired by the lush greens, warm earth, and vibrant life of the tropics. Every piece I make is original — painted by hand, never printed.
+      <br><br>
+      I take commissions too — if you have an idea, let's make it happen.
+    </p>
+    <a href="#contact" class="btn-light">Get in touch</a>
+  </div>
+  <div class="about-strip-right">
+    <div class="stat-item">
+      <p class="stat-num">100%</p>
+      <p class="stat-label">Original, hand-painted works — never prints</p>
+    </div>
+    <div class="stat-item">
+      <p class="stat-num">Cebu City</p>
+      <p class="stat-label">Based in Cebu City · Ships nationwide &amp; worldwide</p>
+    </div>
+    <div class="stat-item">
+      <p class="stat-num">Open</p>
+      <p class="stat-label">Commissions available — custom pieces welcome</p>
+    </div>
+  </div>
+</div>
+
+<!-- TRUST SIGNALS -->
+<section class="trust">
+  <div class="trust-grid">
+    <div class="trust-item">
+      <svg class="trust-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="4" y="4" width="24" height="24" rx="2"/>
+        <path d="M10 16l4 4 8-8"/>
+      </svg>
+      <h3 class="trust-title">Original artwork</h3>
+      <p class="trust-desc">Every piece is hand-painted and one of a kind. No prints, no reproductions.</p>
+    </div>
+    <div class="trust-item">
+      <svg class="trust-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="4" y="10" width="24" height="16" rx="2"/>
+        <path d="M10 10V8a6 6 0 0112 0v2"/>
+      </svg>
+      <h3 class="trust-title">Secure payment</h3>
+      <p class="trust-desc">Pay via GCash, Maya, credit card (PayMongo) or PayPal for international orders.</p>
+    </div>
+    <div class="trust-item">
+      <svg class="trust-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M4 16h18M16 10l6 6-6 6"/>
+        <path d="M26 8v16"/>
+      </svg>
+      <h3 class="trust-title">Ships nationwide</h3>
+      <p class="trust-desc">Carefully packed and shipped via LBC or J&amp;T Express. International shipping available.</p>
+    </div>
+    <div class="trust-item">
+      <svg class="trust-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="16" cy="16" r="12"/>
+        <path d="M16 10v6l4 4"/>
+      </svg>
+      <h3 class="trust-title">Commissions open</h3>
+      <p class="trust-desc">Want something custom? Message me on Facebook or email to discuss your idea.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO ORDER -->
+<section class="process" id="how-to-order">
+  <div class="section-header">
+    <div>
+      <p class="section-eyebrow">Simple process</p>
+      <h2 class="section-title">How to order</h2>
+    </div>
+  </div>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-num">1</div>
+      <h3 class="step-title">Browse &amp; pick</h3>
+      <p class="step-desc">Find a painting you love in the gallery. Check the size, medium, and price.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">2</div>
+      <h3 class="step-title">Message me</h3>
+      <p class="step-desc">Send me a message on Facebook Messenger or email to reserve the piece.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">3</div>
+      <h3 class="step-title">Pay securely</h3>
+      <p class="step-desc">Pay via GCash or I'll send you a PayMongo link for card or e-wallet payment.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">4</div>
+      <h3 class="step-title">Receive your art</h3>
+      <p class="step-desc">Your painting is carefully packed and shipped to your door via LBC or J&amp;T.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT STRIP -->
+<div class="contact-strip" id="contact">
+  <div class="contact-left">
+    <h2 class="contact-title">Ready to bring a painting home?</h2>
+    <p class="contact-sub">Reach out on Facebook, send an email, or message me directly — I reply within 24 hours.</p>
+  </div>
+  <div class="contact-links">
+    <a href="https://www.facebook.com/JessesJungalow" class="contact-btn" target="_blank">Facebook</a>
+    <a href="mailto:jervelle11711@gmail.com" class="contact-btn-outline">Send email</a>
+    <a href="https://paypal.me/YOUR-LINK" class="contact-btn-outline" target="_blank">PayPal (intl)</a>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Painting detail">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous">&#8592;</button>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next">&#8594;</button>
+  <div class="lightbox-inner">
+    <div class="lightbox-img-wrap">
+      <img id="lightboxImg" src="" alt="" />
+    </div>
+    <div class="lightbox-info">
+      <p class="lightbox-eyebrow" id="lightboxEyebrow"></p>
+      <h2 class="lightbox-title" id="lightboxTitle"></h2>
+      <p class="lightbox-meta" id="lightboxMeta"></p>
+      <hr class="lightbox-divider">
       <div>
-        <p class="section-eyebrow">Available works</p>
-        <h2 class="section-title">Featured pieces</h2>
+        <p class="lightbox-price" id="lightboxPrice"></p>
+        <p class="lightbox-price-note" id="lightboxNote"></p>
       </div>
-      <a href="#gallery" class="section-link">View all →</a>
-    </div>
-    <div class="paintings-grid">
-
-      <div class="painting-card">
-        <div class="painting-img painting-img-1">
-          <span class="available-badge">Available</span>
-          <img src="The Daily Grace.jpg" alt="The Daily Grace" style="width:100%;height:100%;object-fit:cover;display:block;">
-        </div>
-        <div class="painting-body">
-          <h3 class="painting-title">Painting Title Here</h3>
-          <p class="painting-meta">Acrylic on canvas · 12 × 16 in</p>
-          <div class="painting-footer">
-            <span class="painting-price">₱75,000</span>
-            <!-- REPLACE the href below with your PayMongo payment link -->
-            <a href="https://pm.link/org-9kmeSzBre34pbKkjBh3fUPVD/lN0hYkR" class="btn-small" target="_blank">Order now</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="painting-card">
-        <div class="painting-img painting-img-2">
-          <span class="available-badge">Available</span>
-          <img src="Heart of the Lotus.jpg" alt="Heart of the Lotus" style="width:100%;height:100%;object-fit:cover;display:block;">
-        </div>
-        <div class="painting-body">
-          <h3 class="painting-title">Heart of the Lotus</h3>
-          <p class="painting-meta">Acrylic on Canvas · 20 × 24 in</p>
-          <div class="painting-footer">
-            <span class="painting-price">₱78,800 (includes certificate of authenticity and artist’s note) if set Php210,000</span>
-            <a href="https://pm.link/org-9kmeSzBre34pbKkjBh3fUPVD/ZwQOEBB" class="btn-small" target="_blank">Order now</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="painting-card">
-        <div class="painting-img painting-img-3">
-          <span class="available-badge">Available</span>
-          <img src="The Keeper of Flame.jpg" alt="The Keeper of Flame" style="width:100%;height:100%;object-fit:cover;display:block;">
-        </div>
-        <div class="painting-body">
-          <h3 class="painting-title">Painting Title Here</h3>
-          <p class="painting-meta">Acrylic on Canvas · 20 × 24 in</p>
-          <div class="painting-footer">
-            <span class="painting-price">₱78,800 (includes certificate of authenticity and artist’s note)if set Php210,000</span>
-            <a href="https://pm.link/org-9kmeSzBre34pbKkjBh3fUPVD/EJBAPvX" class="btn-small" target="_blank">Order now</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ABOUT STRIP -->
-  <div class="about-strip" id="about">
-    <div class="about-strip-left">
-      <p class="section-eyebrow">About the artist</p>
-      <h2 class="about-title">Hi, I'm Jesse —<br>welcome to the Jungalow</h2>
-      <p class="about-body">
-        I'm a self-taught painter based in Cebu City, Philippines. My work is inspired by the lush greens, warm earth, and vibrant life of the tropics. Every piece I make is original — painted by hand, never printed.
-        <br><br>
-        <!-- Replace the paragraph above with your own story -->
-        I take commissions too — if you have an idea, let's make it happen.
-      </p>
-      <a href="#contact" class="btn-light">Get in touch</a>
-    </div>
-    <div class="about-strip-right">
-      <div class="stat-item">
-        <p class="stat-num">100%</p>
-        <p class="stat-label">Original, hand-painted works — never prints</p>
-      </div>
-      <div class="stat-item">
-        <p class="stat-num">Cebu City</p>
-        <p class="stat-label">Based in Cebu City· Ships nationwide & worldwide</p>
-      </div>
-      <div class="stat-item">
-        <p class="stat-num">Open</p>
-        <p class="stat-label">Commissions available — custom pieces welcome</p>
+      <hr class="lightbox-divider">
+      <div class="lightbox-actions">
+        <a id="lightboxOrder" href="#" class="btn-primary" target="_blank" style="text-align:center;">Order now</a>
+        <a href="#commissions" class="btn-outline" onclick="closeLightbox()" style="text-align:center;">Request commission</a>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- TRUST SIGNALS -->
-  <section class="trust">
-    <div class="trust-grid">
-      <div class="trust-item">
-        <svg class="trust-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
-          <rect x="4" y="4" width="24" height="24" rx="2"/>
-          <path d="M10 16l4 4 8-8"/>
-        </svg>
-        <h3 class="trust-title">Original artwork</h3>
-        <p class="trust-desc">Every piece is hand-painted and one of a kind. No prints, no reproductions.</p>
-      </div>
-      <div class="trust-item">
-        <svg class="trust-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
-          <rect x="4" y="10" width="24" height="16" rx="2"/>
-          <path d="M10 10V8a6 6 0 0112 0v2"/>
-        </svg>
-        <h3 class="trust-title">Secure payment</h3>
-        <p class="trust-desc">Pay via GCash, Maya, credit card (PayMongo) or PayPal for international orders.</p>
-      </div>
-      <div class="trust-item">
-        <svg class="trust-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M4 16h18M16 10l6 6-6 6"/>
-          <path d="M26 8v16"/>
-        </svg>
-        <h3 class="trust-title">Ships nationwide</h3>
-        <p class="trust-desc">Carefully packed and shipped via LBC or J&T Express. International shipping available.</p>
-      </div>
-      <div class="trust-item">
-        <svg class="trust-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
-          <circle cx="16" cy="16" r="12"/>
-          <path d="M16 10v6l4 4"/>
-        </svg>
-        <h3 class="trust-title">Commissions open</h3>
-        <p class="trust-desc">Want something custom? Message me on Facebook or email to discuss your idea.</p>
-      </div>
+<!-- FULL GALLERY / SHOP -->
+<section class="gallery-full" id="shop">
+  <div class="section-header">
+    <div>
+      <p class="section-eyebrow">All works</p>
+      <h2 class="section-title">The collection</h2>
     </div>
-  </section>
+    <span class="gallery-count" id="galleryCount">5 paintings</span>
+  </div>
 
-  <!-- HOW TO ORDER -->
-  <section class="process" id="how-to-order">
-    <div class="section-header">
-      <div>
-        <p class="section-eyebrow">Simple process</p>
-        <h2 class="section-title">How to order</h2>
-      </div>
-    </div>
-    <div class="process-steps">
-      <div class="process-step">
-        <div class="step-num">1</div>
-        <h3 class="step-title">Browse & pick</h3>
-        <p class="step-desc">Find a painting you love in the gallery. Check the size, medium, and price.</p>
-      </div>
-      <div class="process-step">
-        <div class="step-num">2</div>
-        <h3 class="step-title">Message me</h3>
-        <p class="step-desc">Send me a message on Facebook Messenger or email to reserve the piece.</p>
-      </div>
-      <div class="process-step">
-        <div class="step-num">3</div>
-        <h3 class="step-title">Pay securely</h3>
-        <p class="step-desc">Pay via GCash <strong>09XX-XXX-XXXX</strong> or I'll send you a PayMongo link.</p>
-      </div>
-      <div class="process-step">
-        <div class="step-num">4</div>
-        <h3 class="step-title">Receive your art</h3>
-        <p class="step-desc">Your painting is carefully packed and shipped to your door via LBC or J&T.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT STRIP -->
-  <div class="contact-strip" id="contact">
-    <div class="contact-left">
-      <h2 class="contact-title">Ready to bring a painting home?</h2>
-      <p class="contact-sub">Reach out on Facebook, send an email, or message me directly — I reply within 24 hours.</p>
-    </div>
-    <div class="contact-links">
-      <!-- Replace # with your Facebook page URL -->
-      <a href="https://www.facebook.com/JessesJungalow" class="contact-btn" target="_blank">Facebook</a>
-      <!-- Replace with your actual email -->
-      <a href="mailto:jervelle11711@gmail.com" class="contact-btn-outline">Send email</a>
-      <!-- Replace with your PayPal.me link for international buyers -->
-      <a href="https://paypal.me/YOUR-LINK" class="contact-btn-outline" target="_blank">PayPal (intl)</a>
+  <div class="gallery-controls">
+    <div class="gallery-controls-left">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="available">Available</button>
+      <button class="filter-btn" data-filter="acrylic">Acrylic</button>
     </div>
   </div>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-logo"><span>Jesse's</span> Jungalow</div>
-    <p class="footer-copy">© 2026 Jesse's Jungalow · Cebu City, Philippines · All artwork original</p>
-    <div class="footer-social">
-      <a href="https://www.facebook.com/JessesJungalow" target="_blank">Facebook</a>
-      <a href="https://instagram.com/YOUR-HANDLE" target="_blank">Instagram</a>
-    </div>
-  </footer>
+  <div class="gallery-grid" id="galleryGrid">
 
+    <div class="gallery-card" data-index="0" data-medium="acrylic" data-status="available"
+         data-src="The Daily Grace.jpg"
+         data-title="The Daily Grace"
+         data-eyebrow="Acrylic on canvas"
+         data-meta="Acrylic on canvas · 12 × 16 in · 2024"
+         data-price="₱75,000"
+         data-note=""
+         data-order="https://pm.link/org-9kmeSzBre34pbKkjBh3fUPVD/lN0hYkR">
+      <div class="gallery-img">
+        <img src="The Daily Grace.jpg" alt="The Daily Grace" loading="lazy" />
+        <div class="gallery-img-overlay">
+          <div class="gallery-zoom-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg>
+          </div>
+        </div>
+        <span class="gallery-badge badge-available">Available</span>
+      </div>
+      <div class="gallery-body">
+        <h3 class="gallery-title">The Daily Grace</h3>
+        <p class="gallery-meta">Acrylic on canvas · 12 × 16 in</p>
+        <div class="gallery-footer">
+          <div>
+            <p class="gallery-price">₱75,000</p>
+          </div>
+          <a href="https://pm.link/org-9kmeSzBre34pbKkjBh3fUPVD/lN0hYkR" class="btn-small" target="_blank" onclick="event.stopPropagation()">Order now</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-card" data-index="1" data-medium="acrylic" data-status="available"
+         data-src="Heart of the Lotus.jpg"
+         data-title="Heart of the Lotus"
+         data-eyebrow="Acrylic on canvas"
+         data-meta="Acrylic on canvas · 20 × 24 in · 2024"
+         data-price="₱78,800"
+         data-note="Includes certificate of authenticity &amp; artist's note"
+         data-order="https://pm.link/org-9kmeSzBre34pbKkjBh3fUPVD/ZwQOEBB">
+      <div class="gallery-img">
+        <img src="Heart of the Lotus.jpg" alt="Heart of the Lotus" loading="lazy" />
+        <div class="gallery-img-overlay">
+          <div class="gallery-zoom-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg>
+          </div>
+        </div>
+        <span class="gallery-badge badge-available">Available</span>
+      </div>
+      <div class="gallery-body">
+        <h3 class="gallery-title">Heart of the Lotus</h3>
+        <p class="gallery-meta">Acrylic on canvas · 20 × 24 in</p>
+        <div class="gallery-footer">
+          <div>
+            <p class="gallery-price">₱78,800</p>
+            <p class="gallery-price-note">Incl. certificate &amp; artist's note</p>
+          </div>
+          <a href="https://pm.link/org-9kmeSzBre34pbKkjBh3fUPVD/ZwQOEBB" class="btn-small" target="_blank" onclick="event.stopPropagation()">Order now</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-card" data-index="2" data-medium="acrylic" data-status="available"
+         data-src="The Keeper of Flame.jpg"
+         data-title="The Keeper of Flame"
+         data-eyebrow="Acrylic on canvas"
+         data-meta="Acrylic on canvas · 20 × 24 in · 2024"
+         data-price="₱78,800"
+         data-note="Includes certificate of authenticity &amp; artist's note"
+         data-order="https://pm.link/org-9kmeSzBre34pbKkjBh3fUPVD/EJBAPvX">
+      <div class="gallery-img">
+        <img src="The Keeper of Flame.jpg" alt="The Keeper of Flame" loading="lazy" />
+        <div class="gallery-img-overlay">
+          <div class="gallery-zoom-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg>
+          </div>
+        </div>
+        <span class="gallery-badge badge-available">Available</span>
+      </div>
+      <div class="gallery-body">
+        <h3 class="gallery-title">The Keeper of Flame</h3>
+        <p class="gallery-meta">Acrylic on canvas · 20 × 24 in</p>
+        <div class="gallery-footer">
+          <div>
+            <p class="gallery-price">₱78,800</p>
+            <p class="gallery-price-note">Incl. certificate &amp; artist's note</p>
+          </div>
+          <a href="https://pm.link/org-9kmeSzBre34pbKkjBh3fUPVD/EJBAPvX" class="btn-small" target="_blank" onclick="event.stopPropagation()">Order now</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-card" data-index="3" data-medium="acrylic" data-status="available"
+         data-src="The Threaded Reverie.jpg"
+         data-title="The Threaded Reverie"
+         data-eyebrow="Acrylic on canvas"
+         data-meta="Acrylic on canvas · 2024"
+         data-price="Inquire for price"
+         data-note=""
+         data-order="#contact">
+      <div class="gallery-img">
+        <img src="The Threaded Reverie.jpg" alt="The Threaded Reverie" loading="lazy" />
+        <div class="gallery-img-overlay">
+          <div class="gallery-zoom-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg>
+          </div>
+        </div>
+        <span class="gallery-badge badge-available">Available</span>
+      </div>
+      <div class="gallery-body">
+        <h3 class="gallery-title">The Threaded Reverie</h3>
+        <p class="gallery-meta">Acrylic on canvas</p>
+        <div class="gallery-footer">
+          <div><p class="gallery-price">Inquire</p></div>
+          <!-- REPLACE href with PayMongo link when ready -->
+          <a href="#contact" class="btn-small" onclick="event.stopPropagation()">Inquire</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-card" data-index="4" data-medium="acrylic" data-status="available"
+         data-src="The Whispers of Lily.jpg"
+         data-title="The Whispers of Lily"
+         data-eyebrow="Acrylic on canvas"
+         data-meta="Acrylic on canvas · 2024"
+         data-price="Inquire for price"
+         data-note=""
+         data-order="#contact">
+      <div class="gallery-img">
+        <img src="The Whispers of Lily.jpg" alt="The Whispers of Lily" loading="lazy" />
+        <div class="gallery-img-overlay">
+          <div class="gallery-zoom-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg>
+          </div>
+        </div>
+        <span class="gallery-badge badge-available">Available</span>
+      </div>
+      <div class="gallery-body">
+        <h3 class="gallery-title">The Whispers of Lily</h3>
+        <p class="gallery-meta">Acrylic on canvas</p>
+        <div class="gallery-footer">
+          <div><p class="gallery-price">Inquire</p></div>
+          <!-- REPLACE href with PayMongo link when ready -->
+          <a href="#contact" class="btn-small" onclick="event.stopPropagation()">Inquire</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- COMMISSIONS -->
+<section class="commissions" id="commissions">
+  <div class="commissions-inner">
+
+    <div class="commissions-left">
+      <p class="section-eyebrow">Custom work</p>
+      <h2 class="commissions-heading">Commission a painting</h2>
+      <p class="commissions-desc">Have something specific in mind? I'd love to paint it for you. Tell me about your vision — the subject, size, mood, and any references — and I'll get back to you within 48 hours with a quote.</p>
+
+      <div class="commission-promise">
+        <div class="promise-item">
+          <div class="promise-dot"></div>
+          <p class="promise-text"><strong>Consultation first</strong>We'll discuss your idea before any payment is made.</p>
+        </div>
+        <div class="promise-item">
+          <div class="promise-dot"></div>
+          <p class="promise-text"><strong>Progress photos</strong>I share updates as the painting develops so you're never in the dark.</p>
+        </div>
+        <div class="promise-item">
+          <div class="promise-dot"></div>
+          <p class="promise-text"><strong>Revisions included</strong>Minor adjustments before shipping are always part of the process.</p>
+        </div>
+        <div class="promise-item">
+          <div class="promise-dot"></div>
+          <p class="promise-text"><strong>Certificate of authenticity</strong>Every commissioned piece comes signed and documented.</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="commission-form" id="commissionForm">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="cf-name">Your name</label>
+            <input class="form-input" type="text" id="cf-name" placeholder="Maria Santos" autocomplete="name" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cf-email">Email address</label>
+            <input class="form-input" type="email" id="cf-email" placeholder="maria@email.com" autocomplete="email" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="cf-type">Painting type</label>
+            <select class="form-select" id="cf-type">
+              <option value="" disabled selected>Select a type…</option>
+              <option>Portrait (person / pet)</option>
+              <option>Landscape / scenery</option>
+              <option>Still life / object</option>
+              <option>Abstract / concept</option>
+              <option>Floral / botanical</option>
+              <option>Other — I'll describe below</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cf-medium">Preferred medium</label>
+            <select class="form-select" id="cf-medium">
+              <option value="" disabled selected>Select a medium…</option>
+              <option>Acrylic</option>
+              <option>Watercolor</option>
+              <option>Oil</option>
+              <option>No preference — Jesse decides</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="cf-size">Canvas size</label>
+            <select class="form-select" id="cf-size">
+              <option value="" disabled selected>Select a size…</option>
+              <option>Small — up to 12 × 16 in</option>
+              <option>Medium — 16 × 20 in or 20 × 24 in</option>
+              <option>Large — 24 × 30 in or bigger</option>
+              <option>Not sure — open to suggestion</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cf-budget">Budget range</label>
+            <select class="form-select" id="cf-budget">
+              <option value="" disabled selected>Select a range…</option>
+              <option>₱10,000 – ₱30,000</option>
+              <option>₱30,000 – ₱60,000</option>
+              <option>₱60,000 – ₱100,000</option>
+              <option>₱100,000+</option>
+              <option>Flexible — let's discuss</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group full">
+          <label class="form-label" for="cf-vision">Describe your vision</label>
+          <textarea class="form-textarea" id="cf-vision" placeholder="Tell me what you'd like painted — the subject, the mood, colours you love, any reference images you have in mind, and anything else that matters to you…"></textarea>
+          <p class="form-hint">The more detail you share, the better I can bring your idea to life.</p>
+        </div>
+
+        <div class="form-group full">
+          <label class="form-label" for="cf-timeline">Ideal timeline</label>
+          <select class="form-select" id="cf-timeline">
+            <option value="" disabled selected>When do you need it?</option>
+            <option>No rush — 2 to 3 months is fine</option>
+            <option>Within 6 weeks</option>
+            <option>Within 1 month (rush fee may apply)</option>
+            <option>For a specific date — I'll mention it below</option>
+          </select>
+        </div>
+
+        <div class="form-submit-wrap">
+          <button class="btn-submit" id="commissionSubmit">Send inquiry</button>
+          <p class="form-alt">Or message directly on <a href="https://www.facebook.com/JessesJungalow" target="_blank">Facebook</a> or <a href="mailto:jervelle11711@gmail.com">email</a></p>
+        </div>
+
+      </div>
+
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-icon">✉️</div>
+        <h3>Inquiry sent!</h3>
+        <p>Thank you — I'll review your vision and reply within 48 hours to discuss details and pricing. Keep an eye on your inbox.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><span>Jesse's</span> Jungalow</div>
+  <p class="footer-copy">© 2026 Jesse's Jungalow · Cebu City, Philippines · All artwork original</p>
+  <div class="footer-social">
+    <a href="https://www.facebook.com/JessesJungalow" target="_blank">Facebook</a>
+    <a href="https://instagram.com/YOUR-HANDLE" target="_blank">Instagram</a>
+  </div>
+</footer>
+
+<script>
+  /* ── HAMBURGER ── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  function openMenu() {
+    hamburger.classList.add('open');
+    mobileMenu.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { closeMenu(); closeLightbox(); }
+  });
+
+  /* ── LIGHTBOX ── */
+  const lightbox     = document.getElementById('lightbox');
+  const lbImg        = document.getElementById('lightboxImg');
+  const lbTitle      = document.getElementById('lightboxTitle');
+  const lbEyebrow    = document.getElementById('lightboxEyebrow');
+  const lbMeta       = document.getElementById('lightboxMeta');
+  const lbPrice      = document.getElementById('lightboxPrice');
+  const lbNote       = document.getElementById('lightboxNote');
+  const lbOrder      = document.getElementById('lightboxOrder');
+  const lbClose      = document.getElementById('lightboxClose');
+  const lbPrev       = document.getElementById('lightboxPrev');
+  const lbNext       = document.getElementById('lightboxNext');
+
+  const galleryCards = () => [...document.querySelectorAll('.gallery-card:not(.hidden)')];
+  let currentIndex = 0;
+
+  function openLightbox(card) {
+    const cards = galleryCards();
+    currentIndex = cards.indexOf(card);
+    populateLightbox(card);
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function populateLightbox(card) {
+    lbImg.src     = card.dataset.src;
+    lbImg.alt     = card.dataset.title;
+    lbTitle.textContent   = card.dataset.title;
+    lbEyebrow.textContent = card.dataset.eyebrow;
+    lbMeta.textContent    = card.dataset.meta;
+    lbPrice.textContent   = card.dataset.price;
+    lbNote.innerHTML      = card.dataset.note || '';
+    lbOrder.href          = card.dataset.order;
+    // hide order button for inquire-only
+    lbOrder.style.display = card.dataset.order === '#contact' ? 'none' : 'block';
+  }
+  function navigateLightbox(dir) {
+    const cards = galleryCards();
+    currentIndex = (currentIndex + dir + cards.length) % cards.length;
+    populateLightbox(cards[currentIndex]);
+  }
+
+  document.querySelectorAll('.gallery-card').forEach(card => {
+    card.addEventListener('click', () => openLightbox(card));
+  });
+  lbClose.addEventListener('click', closeLightbox);
+  lbPrev.addEventListener('click', () => navigateLightbox(-1));
+  lbNext.addEventListener('click', () => navigateLightbox(1));
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
+  /* ── GALLERY FILTERS ── */
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const galleryCountEl = document.getElementById('galleryCount');
+  const allCards = document.querySelectorAll('.gallery-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      let visible = 0;
+      allCards.forEach(card => {
+        const show = f === 'all'
+          || (f === 'available' && card.dataset.status === 'available')
+          || card.dataset.medium === f;
+        card.classList.toggle('hidden', !show);
+        if (show) visible++;
+      });
+      galleryCountEl.textContent = visible + ' painting' + (visible !== 1 ? 's' : '');
+    });
+  });
+
+  /* ── COMMISSION FORM ── */
+  document.getElementById('commissionSubmit').addEventListener('click', () => {
+    const name    = document.getElementById('cf-name').value.trim();
+    const email   = document.getElementById('cf-email').value.trim();
+    const vision  = document.getElementById('cf-vision').value.trim();
+    if (!name || !email || !vision) {
+      alert('Please fill in at least your name, email, and vision before sending.');
+      return;
+    }
+    // Build mailto link as fallback (no backend needed)
+    const type     = document.getElementById('cf-type').value;
+    const medium   = document.getElementById('cf-medium').value;
+    const size     = document.getElementById('cf-size').value;
+    const budget   = document.getElementById('cf-budget').value;
+    const timeline = document.getElementById('cf-timeline').value;
+    const body = `Name: ${name}%0AEmail: ${email}%0A%0APainting type: ${type}%0AMedium: ${medium}%0ASize: ${size}%0ABudget: ${budget}%0ATimeline: ${timeline}%0A%0AVision:%0A${encodeURIComponent(vision)}`;
+    window.location.href = `mailto:jervelle11711@gmail.com?subject=Commission inquiry from ${encodeURIComponent(name)}&body=${body}`;
+    document.getElementById('commissionForm').style.display = 'none';
+    document.getElementById('formSuccess').classList.add('show');
+  });
+</script>
 </body>
 </html>
