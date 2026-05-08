@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout — Jesse's Jungalow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream:       #F5F0E8;
+      --parchment:   #EDE5D0;
+      --sand:        #D6C9A8;
+      --clay:        #B8935A;
+      --terracotta:  #C4623A;
+      --bark:        #6B4E2A;
+      --forest:      #3D5A3E;
+      --ink:         #2A1F14;
+      --warm-white:  #FDFAF4;
+      --muted:       #8C7B65;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--warm-white);
+      border-bottom: 1px solid var(--sand);
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--terracotta); font-style: italic; }
+    .nav-back {
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--terracotta); }
+    .nav-secure {
+      font-size: 0.78rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .nav-secure svg { color: var(--forest); }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb {
+      padding: 12px 5%;
+      font-size: 0.78rem;
+      color: var(--muted);
+      background: var(--warm-white);
+      border-bottom: 1px solid var(--sand);
+    }
+    .breadcrumb a { color: var(--terracotta); text-decoration: none; }
+    .breadcrumb span { margin: 0 6px; }
+
+    /* ── LAYOUT ── */
+    .checkout-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 5%;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 32px;
+      align-items: start;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--warm-white);
+      border: 1px solid var(--sand);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .card-header {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--sand);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card-num {
+      width: 24px;
+      height: 24px;
+      background: var(--terracotta);
+      color: var(--warm-white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+    .card-num.done {
+      background: var(--forest);
+    }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--ink);
+    }
+    .card-body { padding: 24px; }
+
+    /* ── CONTACT FORM ── */
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .form-group:last-child { margin-bottom: 0; }
+    .form-label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+    .form-input, .form-select {
+      padding: 10px 14px;
+      border: 1px solid var(--sand);
+      border-radius: 2px;
+      background: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus, .form-select:focus { border-color: var(--clay); }
+    .form-input::placeholder { color: var(--muted); }
+
+    /* ── PAYMENT OPTIONS ── */
+    .payment-options { display: flex; flex-direction: column; gap: 12px; }
+    .payment-option {
+      border: 1px solid var(--sand);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .payment-option.selected { border-color: var(--clay); }
+    .payment-option-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      cursor: pointer;
+      background: var(--warm-white);
+      user-select: none;
+    }
+    .payment-option-header:hover { background: var(--parchment); }
+    .payment-radio {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--sand);
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s;
+    }
+    .payment-option.selected .payment-radio { border-color: var(--terracotta); }
+    .payment-radio-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--terracotta);
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .payment-option.selected .payment-radio-dot { opacity: 1; }
+    .payment-icon {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .payment-badge {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 3px 8px;
+      border-radius: 2px;
+    }
+    .badge-gcash { background: #0073CF; color: #fff; }
+    .badge-maya  { background: #21A85B; color: #fff; }
+    .badge-card  { background: var(--parchment); color: var(--bark); border: 1px solid var(--sand); }
+    .badge-paypal { background: #003087; color: #fff; }
+    .badge-bpi   { background: #CC0000; color: #fff; }
+    .badge-qr    { background: var(--ink); color: var(--cream); }
+
+    .payment-option-label {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--ink);
+      flex: 1;
+    }
+    .payment-option-sub {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .payment-detail {
+      display: none;
+      padding: 16px 20px 20px;
+      border-top: 1px solid var(--sand);
+      background: var(--cream);
+    }
+    .payment-option.selected .payment-detail { display: block; }
+
+    /* GCash / BPI QR */
+    .qr-wrap {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .qr-item { text-align: center; }
+    .qr-img {
+      width: 150px;
+      height: 150px;
+      object-fit: contain;
+      background: #fff;
+      border: 1px solid var(--sand);
+      border-radius: 4px;
+      padding: 8px;
+      display: block;
+    }
+    .qr-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 6px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .qr-note {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 14px;
+      line-height: 1.7;
+    }
+    .qr-note strong { color: var(--ink); font-weight: 500; }
+
+    /* Card fields */
+    .card-fields { display: flex; flex-direction: column; gap: 12px; }
+    .card-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    /* PayPal */
+    .paypal-info {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+    .paypal-info strong { color: var(--ink); }
+    .btn-paypal {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: #FFD140;
+      color: #003087;
+      font-weight: 500;
+      font-size: 0.88rem;
+      border-radius: 4px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn-paypal:hover { opacity: 0.88; }
+
+    /* PayMongo */
+    .paymongo-info {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+    .paymongo-info strong { color: var(--ink); }
+
+    /* ── ORDER SUMMARY (right column) ── */
+    .summary-card {
+      background: var(--warm-white);
+      border: 1px solid var(--sand);
+      border-radius: 4px;
+      position: sticky;
+      top: 20px;
+    }
+    .summary-header {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--sand);
+    }
+    .summary-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--ink);
+    }
+    .summary-painting {
+      padding: 20px 24px;
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 14px;
+      border-bottom: 1px solid var(--sand);
+    }
+    .summary-img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 2px;
+      background: var(--sand);
+      display: block;
+    }
+    .summary-painting-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .summary-painting-meta {
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .summary-rows { padding: 16px 24px; }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .summary-row.total {
+      border-top: 1px solid var(--sand);
+      margin-top: 8px;
+      padding-top: 14px;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+    .summary-row.total span:last-child { color: var(--bark); }
+    .summary-note {
+      padding: 0 24px 20px;
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── PLACE ORDER BTN ── */
+    .place-order-wrap { padding: 0 24px 24px; }
+    .btn-place-order {
+      width: 100%;
+      padding: 15px;
+      background: var(--terracotta);
+      color: var(--warm-white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-place-order:hover { background: var(--bark); }
+    .btn-place-order:disabled { background: var(--sand); cursor: not-allowed; }
+    .secure-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    /* ── SUCCESS SCREEN ── */
+    .success-screen {
+      display: none;
+      text-align: center;
+      padding: 60px 24px;
+    }
+    .success-screen.show { display: block; }
+    .success-icon {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+    .success-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+    .success-body {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 460px;
+      margin: 0 auto 24px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .checkout-wrap {
+        grid-template-columns: 1fr;
+        padding: 24px 5%;
+      }
+      .summary-card { position: static; order: -1; }
+      .form-row { grid-template-columns: 1fr; }
+      .card-row { grid-template-columns: 1fr; }
+      .qr-wrap { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo"><span>Jesse's</span> Jungalow</a>
+  <a href="index.html" class="nav-back">
+    ← Back to gallery
+  </a>
+  <span class="nav-secure">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+    Secure checkout
+  </span>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="index.html">Home</a>
+  <span>›</span>
+  <a href="index.html#gallery">Gallery</a>
+  <span>›</span>
+  Checkout
+</div>
+
+<!-- MAIN -->
+<div class="checkout-wrap">
+
+  <!-- LEFT: FORMS -->
+  <div class="checkout-left">
+
+    <!-- STEP 1: CONTACT -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">1</div>
+        <h2 class="card-title">Your contact details</h2>
+      </div>
+      <div class="card-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="co-name">Full name</label>
+            <input class="form-input" type="text" id="co-name" placeholder="Maria Santos" autocomplete="name" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="co-email">Email address</label>
+            <input class="form-input" type="email" id="co-email" placeholder="maria@email.com" autocomplete="email" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="co-phone">Phone / Viber / WhatsApp</label>
+            <input class="form-input" type="tel" id="co-phone" placeholder="09XX XXX XXXX" autocomplete="tel" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="co-city">City / Province</label>
+            <input class="form-input" type="text" id="co-city" placeholder="Cebu City" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="co-address">Shipping address</label>
+          <input class="form-input" type="text" id="co-address" placeholder="Full address for delivery" autocomplete="street-address" />
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: PAYMENT -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">2</div>
+        <h2 class="card-title">Payment method</h2>
+      </div>
+      <div class="card-body">
+        <div class="payment-options">
+
+          <!-- GCASH / MAYA via PayMongo -->
+          <div class="payment-option selected" id="opt-paymongo" onclick="selectPayment('paymongo')">
+            <div class="payment-option-header">
+              <div class="payment-radio"><div class="payment-radio-dot"></div></div>
+              <div class="payment-icon">
+                <span class="payment-badge badge-gcash">GCash</span>
+                <span class="payment-badge badge-maya">Maya</span>
+              </div>
+              <div style="flex:1">
+                <div class="payment-option-label">GCash / Maya</div>
+                <div class="payment-option-sub">Pay via PayMongo — fast and secure</div>
+              </div>
+            </div>
+            <div class="payment-detail">
+              <div class="paymongo-info">
+                After placing your order, we'll send a <strong>PayMongo payment link</strong> to your email or Facebook Messenger. Click it to pay securely via GCash or Maya. Payment is confirmed instantly.
+              </div>
+              <!-- 
+                OPTION: If you have a fixed PayMongo link, replace the button below:
+                <a href="https://link.paymongo.com/YOUR-LINK" class="btn-place-order" target="_blank">Pay via GCash / Maya</a>
+              -->
+            </div>
+          </div>
+
+          <!-- CREDIT / DEBIT CARD via PayMongo -->
+          <div class="payment-option" id="opt-card" onclick="selectPayment('card')">
+            <div class="payment-option-header">
+              <div class="payment-radio"><div class="payment-radio-dot"></div></div>
+              <div class="payment-icon">
+                <span class="payment-badge badge-card">Visa</span>
+                <span class="payment-badge badge-card">Mastercard</span>
+              </div>
+              <div style="flex:1">
+                <div class="payment-option-label">Credit / Debit Card</div>
+                <div class="payment-option-sub">BPI, BDO, UnionBank, and all major cards</div>
+              </div>
+            </div>
+            <div class="payment-detail">
+              <div class="paymongo-info">
+                After placing your order, we'll send a <strong>secure PayMongo card payment link</strong> to your email. Accepts Visa, Mastercard — BPI, BDO, UnionBank, and more. 3D Secure protected.
+              </div>
+            </div>
+          </div>
+
+          <!-- QR CODE (GCash direct / BPI) -->
+          <div class="payment-option" id="opt-qr" onclick="selectPayment('qr')">
+            <div class="payment-option-header">
+              <div class="payment-radio"><div class="payment-radio-dot"></div></div>
+              <div class="payment-icon">
+                <span class="payment-badge badge-qr">QR</span>
+                <span class="payment-badge badge-bpi">BPI</span>
+              </div>
+              <div style="flex:1">
+                <div class="payment-option-label">Scan QR — GCash or BPI</div>
+                <div class="payment-option-sub">Direct transfer — local buyers only</div>
+              </div>
+            </div>
+            <div class="payment-detail">
+              <div class="qr-wrap">
+                <div class="qr-item">
+                  <img src="GCASH-JessesJungalow.jpg" alt="GCash QR Code" class="qr-img" />
+                  <p class="qr-label">GCash</p>
+                </div>
+                <div class="qr-item">
+                  <img src="QR-BPI-JessesJungalow.png" alt="BPI QR Code" class="qr-img" />
+                  <p class="qr-label">BPI</p>
+                </div>
+              </div>
+              <p class="qr-note">
+                Scan the QR code with your GCash or BPI app and send the <strong>exact amount</strong>. After paying, send your <strong>proof of payment</strong> (screenshot) to 
+                <a href="https://www.facebook.com/JessesJungalow" target="_blank" style="color:var(--terracotta);">Facebook Messenger</a> or 
+                <a href="mailto:jervelle11711@gmail.com" style="color:var(--terracotta);">email</a> along with your shipping address.
+              </p>
+            </div>
+          </div>
+
+          <!-- PAYPAL (International) -->
+          <div class="payment-option" id="opt-paypal" onclick="selectPayment('paypal')">
+            <div class="payment-option-header">
+              <div class="payment-radio"><div class="payment-radio-dot"></div></div>
+              <div class="payment-icon">
+                <span class="payment-badge badge-paypal">PayPal</span>
+              </div>
+              <div style="flex:1">
+                <div class="payment-option-label">PayPal</div>
+                <div class="payment-option-sub">Recommended for international buyers</div>
+              </div>
+            </div>
+            <div class="payment-detail">
+              <p class="paypal-info">
+                Pay securely via PayPal. Accepts international credit cards and PayPal balance. 
+                <!-- REPLACE with your actual PayPal.me link -->
+                <strong>You'll be redirected to PayPal to complete payment.</strong>
+              </p>
+              <!-- REPLACE href with your PayPal.me link e.g. https://paypal.me/JessesJungalow -->
+              <a href="https://paypal.me/YOUR-LINK" class="btn-paypal" target="_blank">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 01-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 00-.607-.541c-.013.076-.026.175-.041.254-.59 3.025-2.566 6.643-8.993 6.643h-2.19l-1.06 6.717h3.513l.375-2.376.03-.175h1.934c4.303 0 6.845-2.14 7.706-6.379.34-1.675.106-2.986-.677-4.143z"/></svg>
+                Pay with PayPal
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3: NOTES -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">3</div>
+        <h2 class="card-title">Additional notes <span style="font-size:0.8rem;font-weight:300;color:var(--muted)">(optional)</span></h2>
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label class="form-label" for="co-notes">Special instructions or message for Jesse</label>
+          <textarea class="form-input" id="co-notes" rows="3" placeholder="E.g. gift wrapping, specific shipping instructions, or anything you'd like to share…" style="resize:vertical;"></textarea>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT: ORDER SUMMARY -->
+  <div class="checkout-right">
+    <div class="summary-card">
+      <div class="summary-header">
+        <h2 class="summary-title">Order summary</h2>
+      </div>
+
+      <!-- Painting info (populated by URL params) -->
+      <div class="summary-painting">
+        <img id="sum-img" src="" alt="Painting" class="summary-img" />
+        <div>
+          <p id="sum-title" class="summary-painting-title">Loading…</p>
+          <p id="sum-meta" class="summary-painting-meta"></p>
+        </div>
+      </div>
+
+      <div class="summary-rows">
+        <div class="summary-row">
+          <span>Painting price</span>
+          <span id="sum-price">—</span>
+        </div>
+        <div class="summary-row">
+          <span>Shipping</span>
+          <span>Quoted after order</span>
+        </div>
+        <div class="summary-row total">
+          <span>Total</span>
+          <span id="sum-total">—</span>
+        </div>
+      </div>
+
+      <p class="summary-note">
+        Shipping cost will be confirmed via message after your order is placed — based on your location and courier (LBC or J&T). International shipping quoted separately.
+      </p>
+
+      <div class="place-order-wrap">
+        <button class="btn-place-order" id="placeOrderBtn" onclick="placeOrder()">Place order</button>
+        <div class="secure-note">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          Secure & encrypted
+        </div>
+      </div>
+
+      <!-- SUCCESS STATE -->
+      <div class="success-screen" id="successScreen">
+        <div class="success-icon">🎨</div>
+        <h3 class="success-title">Order received!</h3>
+        <p class="success-body">
+          Thank you for your order. Jesse will contact you within 24 hours via email or Facebook Messenger to confirm payment and shipping details.
+        </p>
+        <a href="index.html" style="display:inline-block;padding:12px 28px;background:var(--terracotta);color:var(--warm-white);text-decoration:none;border-radius:2px;font-size:0.85rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;">Back to gallery</a>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+  /* ── READ URL PARAMS ── */
+  const params = new URLSearchParams(window.location.search);
+  const title  = params.get('title')  || 'Original Painting';
+  const meta   = params.get('meta')   || 'Jesse\'s Jungalow';
+  const price  = params.get('price')  || '—';
+  const img    = params.get('img')    || '';
+
+  document.getElementById('sum-title').textContent = title;
+  document.getElementById('sum-meta').textContent  = meta;
+  document.getElementById('sum-price').textContent = price ? '₱' + Number(price).toLocaleString() : '—';
+  document.getElementById('sum-total').textContent = price ? '₱' + Number(price).toLocaleString() : '—';
+  if (img) document.getElementById('sum-img').src = img;
+
+  /* ── PAYMENT SELECTION ── */
+  function selectPayment(method) {
+    document.querySelectorAll('.payment-option').forEach(el => el.classList.remove('selected'));
+    document.getElementById('opt-' + method).classList.add('selected');
+  }
+
+  /* ── PLACE ORDER ── */
+  function placeOrder() {
+    const name    = document.getElementById('co-name').value.trim();
+    const email   = document.getElementById('co-email').value.trim();
+    const phone   = document.getElementById('co-phone').value.trim();
+    const address = document.getElementById('co-address').value.trim();
+
+    if (!name || !email || !phone || !address) {
+      alert('Please fill in your name, email, phone, and shipping address before placing your order.');
+      return;
+    }
+
+    const method   = document.querySelector('.payment-option.selected').id.replace('opt-', '');
+    const notes    = document.getElementById('co-notes').value.trim();
+    const painting = document.getElementById('sum-title').textContent;
+    const price    = document.getElementById('sum-price').textContent;
+
+    /* Send email to Jesse with order details */
+    const body = [
+      'Painting: ' + painting,
+      'Price: ' + price,
+      '',
+      'Name: ' + name,
+      'Email: ' + email,
+      'Phone: ' + phone,
+      'Address: ' + address,
+      '',
+      'Payment method: ' + method,
+      'Notes: ' + (notes || 'None'),
+    ].join('%0A');
+
+    const subject = encodeURIComponent('New order: ' + painting + ' — ' + name);
+    window.open('mailto:jervelle11711@gmail.com?subject=' + subject + '&body=' + body);
+
+    /* Show success */
+    document.querySelector('.checkout-left').style.display = 'none';
+    document.querySelector('.summary-painting').style.display = 'none';
+    document.querySelector('.summary-rows').style.display = 'none';
+    document.querySelector('.summary-note').style.display = 'none';
+    document.querySelector('.place-order-wrap').style.display = 'none';
+    document.getElementById('successScreen').classList.add('show');
+  }
+</script>
+
+</body>
+</html>
