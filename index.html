@@ -1331,7 +1331,7 @@ footer {
       </div>
       <hr class="lightbox-divider">
       <div class="lightbox-actions">
-        <a id="lightboxOrder" href="#" class="btn-primary" target="_blank" style="text-align:center;">Order now</a>
+        <a id="lightboxOrder" href="#" class="btn-primary" style="text-align:center;">Order now</a>
         <a href="#commissions" class="btn-outline" onclick="closeLightbox()" style="text-align:center;">Request commission</a>
       </div>
     </div>
@@ -1694,16 +1694,29 @@ footer {
     document.body.style.overflow = '';
   }
   function populateLightbox(card) {
-    lbImg.src     = card.dataset.src;
-    lbImg.alt     = card.dataset.title;
+    lbImg.src             = card.dataset.src;
+    lbImg.alt             = card.dataset.title;
     lbTitle.textContent   = card.dataset.title;
     lbEyebrow.textContent = card.dataset.eyebrow;
     lbMeta.textContent    = card.dataset.meta;
     lbPrice.textContent   = card.dataset.price;
     lbNote.innerHTML      = card.dataset.note || '';
-    lbOrder.href          = card.dataset.order;
-    // hide order button for inquire-only
-    lbOrder.style.display = card.dataset.order === '#contact' ? 'none' : 'block';
+
+    // Build checkout URL with painting details
+    const isInquiry = card.dataset.order === '#contact';
+    if (isInquiry) {
+      lbOrder.style.display = 'none';
+    } else {
+      lbOrder.style.display = 'block';
+      const params = new URLSearchParams({
+        title: card.dataset.title,
+        meta:  card.dataset.meta,
+        price: card.dataset.price.replace(/[^0-9]/g, ''),
+        img:   card.dataset.src,
+      });
+      lbOrder.href   = 'checkout.html?' + params.toString();
+      lbOrder.target = '_self';
+    }
   }
   function navigateLightbox(dir) {
     const cards = galleryCards();
